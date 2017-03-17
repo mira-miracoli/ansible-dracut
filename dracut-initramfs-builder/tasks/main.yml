@@ -10,7 +10,7 @@
     repo: "{{ gitsource }}"
     dest: "{{ gittarget }}"
     depth: 1
-- name: Hack: fix dnbd3 blk.h for CentOS (one day this should get fixed in dnbd3 :))
+- name: Hack fix dnbd3 blk.h for CentOS (one day this should get fixed in dnbd3 :))
   replace:
     dest: "{{ gittarget }}/builder/modules.d/dnbd3-rootfs/scripts/build.sh"
     regexp: 'make -j4 dnbd3 dnbd3-client'

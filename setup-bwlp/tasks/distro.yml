@@ -1,0 +1,18 @@
+---
+- set_fact:
+    pkgnames:
+      - qt-devel
+  when:
+      - ansible_distribution == "CentOS"
+- set_fact:
+    pkgnames:
+      - libqt4-dev
+      - m4
+      - squashfs-tools
+      - pkg-config
+      - cmake
+      - build-essential
+      - xserver-xorg
+  when:
+      - ansible_distribution == "Ubuntu"
+

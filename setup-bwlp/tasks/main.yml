@@ -1,0 +1,12 @@
+---
+- include: tasks/distro.yml
+
+- name: mltk | Install dependencies
+  package: name={{ item }} state=installed
+  with_items: "{{ pkgnames }}"
+
+- name: mltk | Checkout repository
+  git:
+    repo: "{{ gitsource }}"
+    dest: "{{ gittarget }}"
+    depth: 1

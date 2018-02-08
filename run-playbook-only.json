@@ -8,6 +8,7 @@
 		"iso_checksum_type": "none",
 		"output_directory": "output-{{ user `image_dir` }}",
 		"vm_name": "{{ user `vm_name` }}",
+		"accelerator": "kvm",
 		"disk_image": "true",
 		"disk_size": "{{ user `disk_size` }}",
 		"format": "qcow2",

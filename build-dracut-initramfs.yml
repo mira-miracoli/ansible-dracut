@@ -4,4 +4,4 @@
   pre_tasks:
     - setup:
   roles:
-    - { role: "dracut-initramfs-builder", packer_version: "0.12.2" }
+    - { role: "dracut-initramfs-builder" }

@@ -4,4 +4,4 @@
   pre_tasks:
     - setup:
   roles:
-    - { role: "setup-bwlp", packer_version: "0.12.2" }
+    - { role: "setup-bwlp" }

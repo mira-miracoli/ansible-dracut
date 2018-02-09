@@ -17,6 +17,7 @@
   shell: "{{ gittarget }}/builder/build-initramfs.sh -s -d -p {{ gittarget }}/initramfs"
   args:
     creates: "{{ gittarget }}/initramfs"
+
 - name: Fetch built initramfs and kernel (+ hack for weird /@ prefix of BOOT_IMAGE)
   fetch:
     src: "{{ item }}"
@@ -26,6 +27,7 @@
   with_items:
     - "{{ gittarget }}/initramfs"
     - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^/@(/boot/.*)+$', '\\1') }}"
+
 - name: Cleanup
   file:
     path: "{{ gittarget }}"

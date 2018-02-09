@@ -19,7 +19,7 @@
   when:
     - ansible_distribution == "CentOS"
 - name: Build initramfs with dracut
-  shell:  "{{ gittarget }}/builder/build-initramfs.sh -s -d -p {{ gittarget }}/initramfs"
+  shell: "{{ gittarget }}/builder/build-initramfs.sh -s -d -p {{ gittarget }}/initramfs"
   args:
     creates: "{{ gittarget }}/initramfs"
 - name: Fetch built initramfs and kernel (+ hack for weird /@ prefix of BOOT_IMAGE)

@@ -1,7 +1,5 @@
 ---
 - hosts: "all"
   gather_facts: yes
-  pre_tasks:
-    - setup:
   roles:
     - { role: "dracut-initramfs-builder" }

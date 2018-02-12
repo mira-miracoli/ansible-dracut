@@ -4,9 +4,9 @@
 	},
 	"builders": [{
 		"type": "qemu",
-		"iso_url": "{{ user `image_dir` }}/{{ user `image_name` }}",
+		"iso_url": "{{ user `base_image` }}",
 		"iso_checksum_type": "none",
-		"output_directory": "output-{{ user `image_dir` }}",
+		"output_directory": "{{ user `output_directory` }}",
 		"vm_name": "{{ user `vm_name` }}",
 		"accelerator": "kvm",
 		"disk_image": "true",

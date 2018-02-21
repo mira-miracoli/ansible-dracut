@@ -9,6 +9,9 @@
       - libewf-devel
       - afflib-devel
       - device-mapper
+      - wget
+      - systemd-networkd
+      - systemd-resolved
   when:
       - ansible_distribution == "CentOS"
 - set_fact:

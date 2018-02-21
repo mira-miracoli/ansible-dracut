@@ -21,8 +21,8 @@
       - libpixman-1-dev
       - libewf-dev
       - libafflib-dev
+      - libjansson-dev
       - dmsetup
       - iputils-arping
   when:
       - ansible_distribution == "Ubuntu"
-

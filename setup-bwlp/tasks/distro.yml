@@ -6,8 +6,11 @@
       - ansible_distribution == "CentOS"
 - set_fact:
     pkgnames:
+      - automake
+      - lsof
       - libqt4-dev
       - m4
+      - rsync
       - squashfs-tools
       - pkg-config
       - cmake

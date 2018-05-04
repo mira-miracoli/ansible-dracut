@@ -22,6 +22,22 @@
 				["-m", "{{ user `memory` }}"],
 				["-smp", "{{ user `cpus` }}"]
 			]
+		},
+		{
+			"type": "virtualbox-ovf",
+			"source_path": "{{ user `base_image` }}.ovf",
+			"output_directory": "{{ user `output_directory` }}",
+			"vm_name": "{{ user `vm_name` }}",
+			"headless": "{{ user `headless` }}",
+			"ssh_timeout": "{{ user `ssh_timeout` }}",
+			"ssh_username": "{{ user `ssh_username` }}",
+			"ssh_password": "{{ user `ssh_password` }}",
+			"shutdown_command": "systemctl poweroff",
+			"guest_additions_mode": "disable",
+			"vboxmanage": [
+				["modifyvm", "{{ .Name }}", "--memory", "{{ user `memory` }}"],
+				["modifyvm", "{{ .Name }}", "--cpus", "{{ user `cpus` }}"]
+			]
 		}
 	],
 	"provisioners": [{

@@ -11,3 +11,6 @@
     dest: "{{ gittarget }}"
     version: "{{ gitbranch }}"
     depth: 1
+
+- name: mltk | Build bwlp target
+  shell: "{{ gittarget }}/mltk bwlp -b -i"

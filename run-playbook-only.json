@@ -2,26 +2,28 @@
 	"variables": {
 		"ssh_password": "{{ env `ROOTPW` }}"
 	},
-	"builders": [{
-		"type": "qemu",
-		"iso_url": "{{ user `base_image` }}",
-		"iso_checksum_type": "none",
-		"output_directory": "{{ user `output_directory` }}",
-		"vm_name": "{{ user `vm_name` }}",
-		"accelerator": "kvm",
-		"disk_image": "true",
-		"disk_size": "{{ user `disk_size` }}",
-		"format": "qcow2",
-		"headless": "{{ user `headless` }}",
-		"ssh_timeout": "{{ user `ssh_timeout` }}",
-		"ssh_username": "{{ user `ssh_username` }}",
-		"ssh_password": "{{ user `ssh_password` }}",
-		"shutdown_command": "systemctl poweroff",
-		"qemuargs": [
-			["-m", "{{ user `memory` }}"],
-			["-smp", "{{ user `cpus` }}"]
-		]
-	}],
+	"builders": [
+		{
+			"type": "qemu",
+			"iso_url": "{{ user `base_image` }}",
+			"iso_checksum_type": "none",
+			"output_directory": "{{ user `output_directory` }}",
+			"vm_name": "{{ user `vm_name` }}",
+			"accelerator": "kvm",
+			"disk_image": "true",
+			"disk_size": "{{ user `disk_size` }}",
+			"format": "qcow2",
+			"headless": "{{ user `headless` }}",
+			"ssh_timeout": "{{ user `ssh_timeout` }}",
+			"ssh_username": "{{ user `ssh_username` }}",
+			"ssh_password": "{{ user `ssh_password` }}",
+			"shutdown_command": "systemctl poweroff",
+			"qemuargs": [
+				["-m", "{{ user `memory` }}"],
+				["-smp", "{{ user `cpus` }}"]
+			]
+		}
+	],
 	"provisioners": [{
 		"type": "ansible",
 		"playbook_file": "{{ template_dir }}/{{ user `playbook` }}"

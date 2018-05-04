@@ -9,4 +9,5 @@
   git:
     repo: "{{ gitsource }}"
     dest: "{{ gittarget }}"
+    version: "{{ gitbranch }}"
     depth: 1

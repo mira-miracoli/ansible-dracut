@@ -14,7 +14,7 @@
 - include: tasks/dnbd3-fixes.yml
 
 - name: Build initramfs with dracut
-  shell: "{{ gittarget }}/builder/build-initramfs.sh -s -d -p {{ gittarget }}/initramfs"
+  shell: "{{ gittarget }}/builder/build-initramfs.sh -s -d -p {{ gittarget }}/initramfs - --add 'kexec-reboot'"
   args:
     creates: "{{ gittarget }}/initramfs"
 

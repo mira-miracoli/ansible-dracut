@@ -12,6 +12,7 @@
       - wget
       - systemd-networkd
       - systemd-resolved
+      - kexec-tools
   when:
       - ansible_distribution == "CentOS"
 - set_fact:
@@ -24,5 +25,6 @@
       - libjansson-dev
       - dmsetup
       - iputils-arping
+      - kexec-tools
   when:
       - ansible_distribution == "Ubuntu"

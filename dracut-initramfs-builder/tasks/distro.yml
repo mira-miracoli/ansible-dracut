@@ -13,6 +13,7 @@
       - systemd-networkd
       - systemd-resolved
       - kexec-tools
+      - kmod-devel
   when:
       - ansible_distribution == "CentOS"
 - set_fact:
@@ -26,5 +27,6 @@
       - dmsetup
       - iputils-arping
       - kexec-tools
+      - libkmod-dev
   when:
       - ansible_distribution == "Ubuntu"

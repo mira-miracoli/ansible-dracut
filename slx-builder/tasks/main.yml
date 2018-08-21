@@ -1,34 +1,8 @@
 ---
-- include: tasks/distro.yml
+- import_tasks: tasks/install.yml
+  tags:
+    - install
 
-- name: Install dependencies for OpenSLX dracut module
-  package: name={{ item }} state=installed
-  with_items: "{{ pkgnames }}"
-
-- name: Checkout repository of OpenSLX dracut module
-  git:
-    repo: "{{ gitsource }}"
-    dest: "{{ gittarget }}"
-    depth: 1
-
-- include: tasks/dnbd3-fixes.yml
-
-- name: Build initramfs with dracut
-  shell: "{{ gittarget }}/builder/build-initramfs.sh -s -d -p {{ gittarget }}/initramfs - --add 'kexec-reboot'"
-  args:
-    creates: "{{ gittarget }}/initramfs"
-
-- name: Fetch built initramfs and kernel (+ hack for weird /@ prefix of BOOT_IMAGE)
-  fetch:
-    src: "{{ item }}"
-    dest: "{{ playbook_dir }}/boot_files/"
-    fail_on_missing: yes
-    flat: yes
-  with_items:
-    - "{{ gittarget }}/initramfs"
-    - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^/@(/boot/.*)+$', '\\1') }}"
-
-- name: Cleanup
-  file:
-    path: "{{ gittarget }}"
-    state: absent
+- import_tasks: tasks/build.yml
+  tags:
+    - build

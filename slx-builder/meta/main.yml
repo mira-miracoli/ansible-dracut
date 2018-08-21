@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - { role: setup-dev-tools }
-  - { role: disable-selinux, when: ansible_os_family == 'RedHat' }
+  - { role: setup-dev-tools, tags: [install] }
+  - { role: disable-selinux, tags: [build], when: ansible_os_family == 'RedHat' }

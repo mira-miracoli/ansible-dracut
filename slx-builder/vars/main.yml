@@ -1,2 +1,4 @@
-gitsource: "git://git.openslx.org/openslx-ng/systemd-init"
-gittarget: "/opt/systemd-init"
+builder_url: "http://git.openslx.org/openslx-ng/systemd-init.git/plain/builder/build-initramfs.sh"
+builder_checksum: "sha256:adcded46a08d433ae13304a27cfbd650f9abcf4298eec5934f2647e9b828bb9e"
+builder_path: "/opt/systemd-init/build-initramfs.sh"
+builder_target: "{{ builder_path | dirname }}/initramfs"

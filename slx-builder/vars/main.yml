@@ -1,4 +1,7 @@
 builder_url: "http://git.openslx.org/openslx-ng/systemd-init.git/plain/builder/build-initramfs.sh"
-builder_checksum: "sha256:adcded46a08d433ae13304a27cfbd650f9abcf4298eec5934f2647e9b828bb9e"
+builder_checksum: "sha256:c8b31a2031f585f0f9aa47a541ede98fd198192a2cc2a6e62ece47a8bcd0efa6"
+# for dracut-v44 branch:
+# builder_url: "http://git.openslx.org/openslx-ng/systemd-init.git/plain/builder/build-initramfs.sh?h=dracut-v44"
+# builder_checksum: "sha256:03657667df4d2fc9be656f44805057e2e18c1b6b9b3ef4b3dff4f8e9a0c2a139"
 builder_path: "/opt/systemd-init/build-initramfs.sh"
 builder_target: "{{ builder_path | dirname }}/initramfs"

@@ -4,5 +4,7 @@
 
 # Finally lets install those packages
 - name: Install dev tools
-  package: name={{ item }} state=installed
+  package:
+    name: "{{ item }}"
+    state: present
   with_items: "{{ pkgnames }}"

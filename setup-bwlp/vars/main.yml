@@ -1,3 +1,0 @@
-gitsource: "git://git.openslx.org/openslx-ng/mltk"
-gittarget: "/opt/mltk"
-gitbranch: "installer"

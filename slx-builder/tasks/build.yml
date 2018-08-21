@@ -1,0 +1,20 @@
+---
+- name: OpenSLX dracut | Build initramfs
+  shell: "{{ builder_path }} -s -d -p {{ builder_target }} - --add 'kexec-reboot'"
+  args:
+    creates: "{{ builder_target }}"
+
+- name: OpenSLX dracut | Retrieve initramfs and kernel (+ hack for weird /@ prefix of BOOT_IMAGE)
+  fetch:
+    src: "{{ item }}"
+    dest: "{{ playbook_dir }}/boot_files/"
+    fail_on_missing: yes
+    flat: yes
+  with_items:
+    - "{{ builder_target }}"
+    - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^/@(/boot/.*)+$', '\\1') }}"
+
+- name: OpenSLX dracut | Cleanup
+  file:
+    path: "{{ builder_path | dirname }}"
+    state: absent

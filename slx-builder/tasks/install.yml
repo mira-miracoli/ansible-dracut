@@ -1,0 +1,28 @@
+---
+- include: tasks/distro.yml
+
+- name: OpenSLX dracut | Install dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ pkgnames }}"
+
+- name: OpenSLX dracut | Create download destination directory
+  file:
+    path: "{{ builder_path | dirname }}"
+    state: directory
+
+- name: OpenSLX dracut | Download bootstrap script
+  get_url:
+    url: "{{ builder_url }}"
+    checksum: "{{ builder_checksum }}"
+    dest: "{{ builder_path }}"
+    mode: 0550
+
+- name: OpenSLX dracut | Initialize repository
+  shell: "{{ builder_path }} --init"
+  args:
+    creates: "${{ builder_path | dirname }}/dracut/dracut.sh"
+
+- include: tasks/dnbd3-fixes.yml
+

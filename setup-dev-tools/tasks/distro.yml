@@ -9,6 +9,7 @@
     - ansible_distribution == "Ubuntu"
 - set_fact: 
     pkgnames:
+      - "epel-release"
       - "@development tools"
       - "cmake"
       - "git"

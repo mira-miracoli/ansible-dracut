@@ -16,6 +16,7 @@
       - kmod-devel
   when:
       - ansible_distribution == "CentOS"
+      - ansible_distribution_major_version|int < 8
 - set_fact:
     pkgnames:
       - libfuse-dev

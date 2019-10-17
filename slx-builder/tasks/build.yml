@@ -18,7 +18,7 @@
     flat: yes
   with_items:
     - "{{ builder_target }}"
-    - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^/@(/boot/.*)+$', '\\1') }}"
+    - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^.*(/boot/.*)+$', '\\1') }}"
 
 - name: OpenSLX dracut | Cleanup
   file:

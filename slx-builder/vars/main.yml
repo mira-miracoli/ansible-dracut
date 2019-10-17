@@ -1,5 +1,5 @@
-builder_branch: "stable"
+builder_branch: "centos8"
 builder_url: "http://git.openslx.org/openslx-ng/systemd-init.git/plain/builder/build-initramfs.sh?h={{ builder_branch }}"
-builder_checksum: "sha256:ab09fdd8f66d0bf558582a889c3bd84f85ee67141cf3164e1fe433fe8db020ff"
+builder_checksum: "sha256:d31c85cf511e55b084a9a591f61fb1f737e5bd64598c45de2ad9aaf25ad62eee"
 builder_path: "/opt/systemd-init/build-initramfs.sh"
 builder_target: "{{ builder_path | dirname }}/initramfs"

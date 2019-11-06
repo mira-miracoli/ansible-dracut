@@ -1,6 +1,7 @@
 ---
 - set_fact:
     pkgnames:
+      - epel-release
       - kernel-devel
       - fuse-devel
       - jansson-devel
@@ -18,6 +19,7 @@
       - ansible_distribution == "CentOS"
 - set_fact:
     pkgnames:
+      - curl
       - libfuse-dev
       - libglib2.0-dev
       - libpixman-1-dev
@@ -28,5 +30,6 @@
       - iputils-arping
       - kexec-tools
       - libkmod-dev
+      - python
   when:
       - ansible_distribution == "Ubuntu"

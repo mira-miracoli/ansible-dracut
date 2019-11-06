@@ -1,5 +1,5 @@
-builder_branch: "stable"
+builder_branch: "nobash"
 builder_url: "http://git.openslx.org/openslx-ng/systemd-init.git/plain/builder/build-initramfs.sh?h={{ builder_branch }}"
-builder_checksum: "sha256:ab09fdd8f66d0bf558582a889c3bd84f85ee67141cf3164e1fe433fe8db020ff"
+builder_checksum: "sha256:e9ed96452e1b8c3c23b91536157cde7a99f63aa882f8eebb830352c46f8b20b6"
 builder_path: "/opt/systemd-init/build-initramfs.sh"
 builder_target: "{{ builder_path | dirname }}/initramfs"

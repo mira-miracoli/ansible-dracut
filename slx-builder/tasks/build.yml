@@ -4,6 +4,12 @@
   args:
     creates: "{{ builder_target }}"
 
+- name: Remove default loop module
+  shell: "cd {{ builder_path | dirname }}; mkdir tmp; cd tmp; /usr/lib/dracut/skipcpio ../initramfs | zcat | cpio -ivd; rm -f lib/modules/*/kernel/drivers/block/loop.ko.xz; find . | cpio -o -H newc > ../initramfs; cd ..; rm -rf tmp"
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "8"
+
 - name: OpenSLX dracut | Retrieve initramfs and kernel (+ hack for weird /@ prefix of BOOT_IMAGE)
   fetch:
     src: "{{ item }}"
@@ -12,7 +18,7 @@
     flat: yes
   with_items:
     - "{{ builder_target }}"
-    - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^/@(/boot/.*)+$', '\\1') }}"
+    - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^.*(/boot/.*)+$', '\\1') }}"
 
 - name: OpenSLX dracut | Cleanup
   file:

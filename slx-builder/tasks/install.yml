@@ -1,12 +1,4 @@
 ---
-- include: tasks/distro.yml
-
-- name: OpenSLX dracut | Install dependencies
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ pkgnames }}"
-
 - name: OpenSLX dracut | Create download destination directory
   file:
     path: "{{ builder_path | dirname }}"
@@ -24,5 +16,10 @@
   args:
     creates: "${{ builder_path | dirname }}/dracut/dracut.sh"
 
-- include: tasks/dnbd3-fixes.yml
+- name: OpenSLX dracut | Get distro specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+      - "files/distro_specific/{{ ansible_distribution }}-{{ ansible_distribution_version}}.yml"
+      - "files/distro_specific/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+      - "files/distro_specific/{{ ansible_distribution }}.yml"
 

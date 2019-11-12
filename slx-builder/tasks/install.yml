@@ -1,20 +1,33 @@
 ---
 - name: OpenSLX dracut | Create download destination directory
   file:
-    path: "{{ builder_path | dirname }}"
+    path: "{{ builder_dir }}"
     state: directory
 
-- name: OpenSLX dracut | Download bootstrap script
-  get_url:
-    url: "{{ builder_url }}"
-    checksum: "{{ builder_checksum }}"
-    dest: "{{ builder_path }}"
+- name: OpenSLX dracut | Copy downloader bootstrap script
+  copy:
+    remote_src: no
+    src: "get_builder.sh"
+    dest: "{{ builder_dir }}"
     mode: 0550
 
-- name: OpenSLX dracut | Initialize repository
-  shell: "{{ builder_path }} --init"
+- debug:
+        msg: "Searching for: downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_version}} | downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_major_version}} | downloader_env/{{ ansible_distribution }}"
+
+- name: OpenSLX dracut | Copy env file for downloader
+  template: 
+    src: "{{ item }}"
+    dest: "{{ builder_dir }}/build_versions"
+  with_first_found:
+      - "files/downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_version}}"
+      - "files/downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}"
+      - "files/downloader_env/{{ ansible_distribution }}"
+
+- name: OpenSLX dracut | Get bootstrap
+  shell: "{{ builder_dir }}/get_builder.sh --dev"
   args:
-    creates: "${{ builder_path | dirname }}/dracut/dracut.sh"
+    chdir: "{{ builder_dir }}"
+    creates: "${{ builder_dir }}/systemd_init"
 
 - name: OpenSLX dracut | Get distro specific tasks
   include_tasks: "{{ item }}"
@@ -23,3 +36,7 @@
       - "files/distro_specific/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
       - "files/distro_specific/{{ ansible_distribution }}.yml"
 
+- name: OpenSLX dracut | Initialize repository
+  shell: "{{ builder_path }} --init"
+  args:
+    creates: "${{ builder_dir }}/systemd_init/builder/dracut/dracut.sh"

@@ -1,0 +1,53 @@
+---
+- set_fact:
+    pkgnames:
+      - kernel-devel
+      - fuse-devel
+      - jansson-devel
+      - glib2-devel
+      - pixman-devel
+      - libewf-devel
+      - afflib-devel
+      - device-mapper
+      - wget
+      - systemd-networkd
+      - systemd-resolved
+      - kexec-tools
+      - kmod-devel
+  when:
+      - ansible_distribution == "CentOS"
+      - ansible_distribution_major_version|int < 8
+- set_fact:
+    pkgnames:
+      - kernel-devel
+      - fuse-devel
+      - jansson-devel
+      - glib2-devel
+      - pixman-devel
+      - device-mapper
+      - wget
+      - kexec-tools
+      - kmod-devel
+      - http://download-ib01.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/os/Packages/l/libewf-20140608-12.fc29.x86_64.rpm
+      - http://download-ib01.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/os/Packages/l/libewf-devel-20140608-12.fc29.x86_64.rpm
+      - http://download-ib01.fedoraproject.org/pub/fedora/linux/updates/29/Everything/x86_64/Packages/a/afflib-3.7.18-2.fc29.x86_64.rpm
+      - http://download-ib01.fedoraproject.org/pub/fedora/linux/updates/29/Everything/x86_64/Packages/a/afflib-devel-3.7.18-2.fc29.x86_64.rpm
+      - elfutils-libelf-devel
+      - python2
+  when:
+      - ansible_distribution == "CentOS"
+      - ansible_distribution_major_version == "8"
+- set_fact:
+    pkgnames:
+      - libfuse-dev
+      - libglib2.0-dev
+      - libpixman-1-dev
+      - libewf-dev
+      - libafflib-dev
+      - libjansson-dev
+      - dmsetup
+      - iputils-arping
+      - kexec-tools
+      - libkmod-dev
+  when:
+      - ansible_distribution == "Ubuntu"

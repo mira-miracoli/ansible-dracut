@@ -1,0 +1,26 @@
+---
+- name: Enable powerTools in CentOS 8
+  command: dnf config-manager --set-enabled PowerTools
+
+- name: CentOS8 | Install packages
+  yum:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+     packages:
+       - kernel-devel
+       - fuse-devel
+       - jansson-devel
+       - glib2-devel
+       - pixman-devel
+       - device-mapper
+       - wget
+       - kexec-tools
+       - kmod-devel
+       - http://download-ib01.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/os/Packages/l/libewf-20140608-12.fc29.x86_64.rpm
+       - http://download-ib01.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/os/Packages/l/libewf-devel-20140608-12.fc29.x86_64.rpm
+       - http://download-ib01.fedoraproject.org/pub/fedora/linux/updates/29/Everything/x86_64/Packages/a/afflib-3.7.18-2.fc29.x86_64.rpm
+       - http://download-ib01.fedoraproject.org/pub/fedora/linux/updates/29/Everything/x86_64/Packages/a/afflib-devel-3.7.18-2.fc29.x86_64.rpm
+       - elfutils-libelf-devel
+       - python2

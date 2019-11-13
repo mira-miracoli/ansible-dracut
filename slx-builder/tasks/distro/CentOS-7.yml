@@ -6,7 +6,7 @@
      update_cache: yes
   vars:
      packages:
-       - kernel-devel
+       - kernel-devel-{{ ansible_kernel }}
        - fuse-devel
        - jansson-devel
        - glib2-devel

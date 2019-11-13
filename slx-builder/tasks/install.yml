@@ -24,7 +24,7 @@
       - "files/downloader_env/{{ ansible_distribution }}"
 
 - name: OpenSLX dracut | Get bootstrap
-  shell: "{{ builder_dir }}/get_builder.sh --dev"
+  shell: "{{ builder_dir }}/get_builder.sh"
   args:
     chdir: "{{ builder_dir }}"
     creates: "${{ builder_dir }}/systemd_init"

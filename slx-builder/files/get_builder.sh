@@ -20,13 +20,11 @@
 
 verbose="no"
 debug="no"
-dev="no"
 version="build_versions"
 
 print_help_message() {
 				echo "Downloader for systemd-init"
-				echo "Can download as git or as tarball(--dev, default is tarball)"
-				echo "Can set the downloaded version with --version(default is latest)"
+				echo "Can set the env file with --version(default is build_versions)"
 				echo "$0: [--dev] [--verbose] [--version <version_file>] [--debug]"
 }
 
@@ -47,10 +45,6 @@ parse_command_line() {
 		verbose='yes'
 		debug='yes'
 		set -x
-		;;
-	    --dev)
-		shift
-		dev="yes"
 		;;
             --version)
                 shift
@@ -110,20 +104,7 @@ github_parser() {
 	url=$4
 	vecho "> github b-$branch c-$commit p-$path u-$url"
 	vecho "> args: $@"
-
-	if [[ $dev == "yes" ]]; then
-		git_parser "$branch" "$commit" "$path" "$url"
-	else
-		if [[ -z $commit ]]; then
-			version=$branch
-		else
-			version=$commit
-		fi
-		rm -rf $path || true
-		mkdir -p $path
-		curl --location "https:${url::-4}/archive/$version.tar.gz" | tar --extract --gzip \
-			--directory "$path" --strip-components 1
-	fi
+	git_parser "$branch" "$commit" "$path" "$url"
 }
 
 gitslx_parser() {
@@ -133,23 +114,7 @@ gitslx_parser() {
 	url=$4
 	vecho "> gitslx b-$branch c-$commit p-$path u-$url"
 	vecho "> args: $@"
-	if [[ $dev == "yes" ]]; then
-		git_parser "$branch" "$commit" "$path" "$url"
-	else
-		if [[ -z $commit ]]; then
-			version=$branch
-		else
-			version=$commit
-		fi
-		rm -rf $path || true
-		mkdir -p $path
-		reponame=$(echo ${url::-4} | rev | cut -d / -f 1 | rev)
-		curl --location "https:${url}/snapshot/${reponame}-${version}.tar.gz" | tar --extract --gzip \
-			--directory "$path" --strip-components 1
-		if [[ $? -ne 0 ]]; then
-			git_parser "$branch" "$commit" "$path" "$url"
-		fi
-	fi
+	git_parser "$branch" "$commit" "$path" "$url"
 }
 
 dracut_parser() {
@@ -173,7 +138,6 @@ parse_command_line $@
 . $version
 
 vecho "Verbose: $verbose"
-vecho "dev:	$dev"
 vecho "version_file: $version"
 vecho "modules: ${modules[@]}"
 

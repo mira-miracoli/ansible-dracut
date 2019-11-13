@@ -1,8 +1,5 @@
 ---
-- name: Enable powerTools in CentOS 8
-  command: dnf config-manager --set-enabled PowerTools
-
-- name: CentOS8 | Install packages
+- name: CentOS-8 | Install packages
   yum:
      name: "{{ packages }}"
      state: latest

@@ -1,0 +1,28 @@
+---
+- name: CentOS-7 | Install packages
+  yum:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+     packages:
+       - kernel-devel
+       - fuse-devel
+       - jansson-devel
+       - glib2-devel
+       - pixman-devel
+       - libewf-devel
+       - afflib-devel
+       - device-mapper
+       - wget
+       - systemd-networkd
+       - systemd-resolved
+       - kexec-tools
+       - kmod-devel
+
+- name: CentOS-7 | Hack fix dnbd3 blk.h for CentOS kernels with backports
+  replace:
+    dest: "{{ builder_path | dirname }}/modules.d/dnbd3-rootfs/scripts/build.sh"
+    regexp: 'make -j4 dnbd3 dnbd3-client'
+    replace: 'sed -i "s/KERNEL_VERSION.*/KERNEL_VERSION\(3, 10, 0\)/g" blk.h && make -j4 dnbd3 dnbd3-client'
+    backup: yes

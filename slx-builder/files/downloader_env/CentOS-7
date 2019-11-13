@@ -1,43 +1,40 @@
 # systemd_init is obligatory!
 # you should have defined every option(handler, url, path, branch, commit)
 # sometimes the names are not reflective, it depends in the handler
-#modules=( "systemd_init" "dracut" "rebash" "dnbd3" "xmount" "qemu_xmount" )
-modules=( "systemd_init" )
+modules=( "systemd_init" "dracut" "rebash" "dnbd3" "xmount" "qemu_xmount" )
 
 systemd_init_handler="gitslx"
 systemd_init_url="//git.openslx.org/openslx-ng/systemd-init.git"
 systemd_init_path="systemd-init"
 systemd_init_branch="stable"
-systemd_init_commit="aefc654441f27aac20"
+systemd_init_commit="a96543874e53"
 
+dracut_handler="dracut"
+dracut_url="https://www.kernel.org/pub/linux/utils/boot/dracut/dracut"
+dracut_path="${systemd_init_path}/builder/dracut"
+dracut_branch="046"
+dracut_commit=""
 
-### This stable version downloads everything, so to not change it just commenting it
-#dracut_handler="dracut"
-#dracut_url="https://www.kernel.org/pub/linux/utils/boot/dracut/dracut"
-#dracut_path="${systemd_init_path}/builder/dracut"
-#dracut_branch="046"
-#dracut_commit=""
+rebash_handler="github"
+rebash_url="//github.com/jandob/rebash.git"
+rebash_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/scripts/rebash"
+rebash_branch="master"
+rebash_commit="6ca5b39"
 
-#rebash_handler="github"
-#rebash_url="//github.com/jandob/rebash.git"
-#rebash_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/scripts/rebash"
-#rebash_branch="master"
-#rebash_commit="6ca5b39"
+dnbd3_handler="gitslx"
+dnbd3_url="//git.openslx.org/dnbd3.git"
+dnbd3_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/binaries/dnbd3"
+dnbd3_branch="master"
+dnbd3_commit="c881c79"
 
-#dnbd3_handler="gitslx"
-#dnbd3_url="//git.openslx.org/dnbd3.git"
-#dnbd3_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/binaries/dnbd3"
-#dnbd3_branch="master"
-#dnbd3_commit="c881c79"
+qemu_xmount_handler="github"
+qemu_xmount_url="//github.com/eaas-framework/qemu.git"
+qemu_xmount_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/binaries/qemu-xmount"
+qemu_xmount_branch="libxmount_input"
+qemu_xmount_commit="4873cd023da8511ed9792a318d1456c949046123"
 
-#qemu_xmount_handler="github"
-#qemu_xmount_url="//github.com/eaas-framework/qemu.git"
-#qemu_xmount_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/binaries/qemu-xmount"
-#qemu_xmount_branch="libxmount_input"
-#qemu_xmount_commit="4873cd023da8511ed9792a318d1456c949046123"
-
-#xmount_handler="github"
-#xmount_url="//github.com/eaas-framework/xmount.git"
-#xmount_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/binaries/xmount"
-#xmount_branch="master"
-#xmount_commit="0151375"
+xmount_handler="github"
+xmount_url="//github.com/eaas-framework/xmount.git"
+xmount_path="${systemd_init_path}/builder/modules.d/dnbd3-rootfs/binaries/xmount"
+xmount_branch="master"
+xmount_commit="0151375"

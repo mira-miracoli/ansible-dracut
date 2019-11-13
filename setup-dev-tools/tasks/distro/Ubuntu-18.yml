@@ -1,0 +1,11 @@
+---
+- name: Ubuntu-18 | Install packages
+  yum:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+    packages:
+      - "build-essential"
+      - "cmake"
+      - "git"

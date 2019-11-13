@@ -1,0 +1,16 @@
+---
+- name: CentOS-8 | Install packages
+  yum:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+    packages:
+      - "epel-release"
+      - "@development tools"
+      - "cmake"
+      - "git"
+
+- name: CentOS-8 | Enable powerTools in CentOS 8
+  command: dnf config-manager --set-enabled PowerTools
+

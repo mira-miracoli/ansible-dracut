@@ -1,18 +1,7 @@
 ---
-- name: Enable powerTools in CentOS 8
-  command: dnf config-manager --set-enabled PowerTools
-  when:
-       - ansible_distribution == "CentOS"
-       - ansible_distribution_major_version == "8"
-
-
-# Get packages names for the target distro
-- include: tasks/distro.yml
-
-# Finally lets install those packages
-- name: Install dev tools
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ pkgnames }}"
-
+- name: DevTools | Get distro specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+      - "tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_version}}.yml"
+      - "tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+      - "tasks/distro/{{ ansible_distribution }}.yml"

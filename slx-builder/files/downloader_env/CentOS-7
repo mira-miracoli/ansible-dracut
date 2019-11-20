@@ -6,7 +6,7 @@ modules=( "systemd_init" "dracut" "rebash" "dnbd3" "xmount" "qemu_xmount" )
 systemd_init_handler="gitslx"
 systemd_init_url="//git.openslx.org/openslx-ng/systemd-init.git"
 systemd_init_path="systemd-init"
-systemd_init_branch="downloader_stable"
+systemd_init_branch="stable"
 systemd_init_commit="c63e555a86"
 
 dracut_handler="dracut"

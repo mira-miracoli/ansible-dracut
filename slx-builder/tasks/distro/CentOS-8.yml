@@ -12,16 +12,19 @@
      name: "{{ packages }}"
      state: latest
      update_cache: yes
+     enablerepo: forensics
   vars:
      packages:
        - kernel-devel
+       - kmod-devel
        - fuse-devel
        - jansson-devel
        - glib2-devel
        - pixman-devel
+       - afflib-devel
+       - libewf-devel
+       - elfutils-libelf-devel
+       - python2
        - device-mapper
        - wget
        - kexec-tools
-       - kmod-devel
-       - elfutils-libelf-devel
-       - python2

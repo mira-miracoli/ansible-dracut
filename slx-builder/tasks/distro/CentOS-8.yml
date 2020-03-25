@@ -1,4 +1,12 @@
 ---
+- name: Activate PowerTools for CERT-Forensics Repo
+  command: dnf config-manager --set-enabled PowerTools
+
+- name: Install cert-forensics-tools-release-el8.rpm
+  dnf:
+    name: 'https://forensics.cert.org/cert-forensics-tools-release-el8.rpm'
+    state: present
+
 - name: CentOS-8 | Install packages
   yum:
      name: "{{ packages }}"
@@ -15,9 +23,5 @@
        - wget
        - kexec-tools
        - kmod-devel
-       - http://download-ib01.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/os/Packages/l/libewf-20140608-12.fc29.x86_64.rpm
-       - http://download-ib01.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/os/Packages/l/libewf-devel-20140608-12.fc29.x86_64.rpm
-       - http://download-ib01.fedoraproject.org/pub/fedora/linux/updates/29/Everything/x86_64/Packages/a/afflib-3.7.18-2.fc29.x86_64.rpm
-       - http://download-ib01.fedoraproject.org/pub/fedora/linux/updates/29/Everything/x86_64/Packages/a/afflib-devel-3.7.18-2.fc29.x86_64.rpm
        - elfutils-libelf-devel
        - python2

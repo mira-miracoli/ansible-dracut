@@ -18,9 +18,9 @@
 # End.
 
 
-verbose="no"
-debug="no"
-version="build_versions"
+declare -g verbose="no"
+declare -g debug="no"
+declare -g version="build_versions"
 
 print_help_message() {
 	echo "Downloader for systemd-init"
@@ -68,14 +68,14 @@ vecho() {
 }
 
 git_parser() {
-	branch=$1
-	commit=$2
-	path=$3
-	url=$4
+	local branch=$1
+	local commit=$2
+	local path=$3
+	local url=$4
 	vecho "> git b-$branch c-$commit p-$path u-$url"
 	vecho "> args: $@"
 
-	gitargs=()
+	local gitargs=()
 	if [[ -n "$branch" ]]; then
 		gitargs+=("--single-branch --branch $branch")
 	fi
@@ -85,7 +85,7 @@ git_parser() {
 	else
 		version=$commit
 	fi
-	revision=$version
+	local revision=$version
 	git clone --depth 1 --branch ${branch} git:${url} ${path}
 	pushd $path
 	i=50
@@ -97,33 +97,33 @@ git_parser() {
 }
 
 github_parser() {
-	branch=$1
-	commit=$2
-	path=$3
-	url=$4
+	local branch=$1
+	local commit=$2
+	local path=$3
+	local url=$4
 	vecho "> github b-$branch c-$commit p-$path u-$url"
 	vecho "> args: $@"
 	git_parser "$branch" "$commit" "$path" "$url"
 }
 
 gitslx_parser() {
-	branch=$1
-	commit=$2
-	path=$3
-	url=$4
+	local branch=$1
+	local commit=$2
+	local path=$3
+	local url=$4
 	vecho "> gitslx b-$branch c-$commit p-$path u-$url"
 	vecho "> args: $@"
 	git_parser "$branch" "$commit" "$path" "$url"
 }
 
 dracut_parser() {
-	branch=$1
-	commit=$2
-	path=$3
-	url=$4
+	local branch=$1
+	local commit=$2
+	local path=$3
+	local url=$4
 
-	dracut_version=${branch}
-	dracut_resource_url="$url-$dracut_version.tar.gz"
+	local dracut_version=${branch}
+	local dracut_resource_url="$url-$dracut_version.tar.gz"
 	if [[ ! -f "${path}/install/dracut-install" ]]; then
 		mkdir --parents "${path}"
 		echo "Download and extract dracut version $dracut_version"

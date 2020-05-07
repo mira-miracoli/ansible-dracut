@@ -13,11 +13,6 @@
 # see http://creativecommons.org/licenses/by/3.0/deed.de
 ## endregion
 
-# Get opt
-# Download from the right place
-# End.
-
-
 declare -g verbose="no"
 declare -g debug="no"
 declare -g version="build_versions"
@@ -61,6 +56,7 @@ parse_command_line() {
 	done
 	return 0
 }
+
 vecho() {
 	if [ $verbose == "yes" ]; then
 		echo $@
@@ -88,9 +84,9 @@ git_parser() {
 	local revision=$version
 	git clone --depth 1 --branch ${branch} git:${url} ${path}
 	pushd $path
-	i=50
+	local i=50
 	while ! git rev-parse --quiet --verify $version^{commit}; do
-		git fetch --depth=$((i+=50));
+		git fetch --depth=$(( i+=50 ))
 	done
 	git reset --hard $version
 	popd

@@ -1,5 +1,5 @@
 ---
-- name: CentOS-7 | Install packages
+- name: CentOS | Install packages
   yum:
      name: "{{ packages }}"
      state: latest

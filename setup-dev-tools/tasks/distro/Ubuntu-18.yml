@@ -1,6 +1,6 @@
 ---
 - name: Ubuntu-18 | Install packages
-  yum:
+  apt:
      name: "{{ packages }}"
      state: latest
      update_cache: yes

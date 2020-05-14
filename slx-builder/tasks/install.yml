@@ -1,42 +1,30 @@
 ---
 - name: OpenSLX dracut | Create download destination directory
   file:
-    path: "{{ builder_dir }}"
+    path: "{{ builder_path | dirname }}"
     state: directory
 
-- name: OpenSLX dracut | Copy downloader bootstrap script
-  copy:
-    remote_src: no
-    src: "get_builder.sh"
-    dest: "{{ builder_dir }}"
+- name: OpenSLX dracut | Get bootstrap script (build-initramfs.sh)
+  get_url:
+    url: "{{ builder_url }}"
+    dest: "{{ builder_path }}"
     mode: 0550
-
-- debug:
-        msg: "Searching for: downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_version}} | downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_major_version}} | downloader_env/{{ ansible_distribution }}"
-
-- name: OpenSLX dracut | Copy env file for downloader
-  template: 
-    src: "{{ item }}"
-    dest: "{{ builder_dir }}/build_versions"
-  with_first_found:
-      - "files/downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_version}}"
-      - "files/downloader_env/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}"
-      - "files/downloader_env/{{ ansible_distribution }}"
-
-- name: OpenSLX dracut | Get bootstrap
-  shell: "{{ builder_dir }}/get_builder.sh"
-  args:
-    chdir: "{{ builder_dir }}"
-    creates: "${{ builder_dir }}/systemd_init"
 
 - name: OpenSLX dracut | Get distro specific tasks
   include_tasks: "{{ item }}"
   with_first_found:
-      - "tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_version}}.yml"
-      - "tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
-      - "tasks/distro/{{ ansible_distribution }}.yml"
+    - "tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_version}}.yml"
+    - "tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+    - "tasks/distro/{{ ansible_distribution }}.yml"
+
+- name: OpenSLX dracut | Include distro variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "vars/distro/{{ ansible_distribution }}-{{ ansible_distribution_version}}.yml"
+    - "vars/distro/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+    - "vars/distro/{{ ansible_distribution }}.yml"
 
 - name: OpenSLX dracut | Initialize repository
-  shell: "{{ builder_path }} --init"
+  shell: "{{ builder_path }} --init --debug {{ builder_extra_args }}"
   args:
-    creates: "${{ builder_dir }}/systemd_init/builder/dracut/dracut.sh"
+    creates: "${{ builder_path | dirname }}/dracut/dracut.sh"

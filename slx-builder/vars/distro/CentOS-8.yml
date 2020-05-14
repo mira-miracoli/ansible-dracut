@@ -1,0 +1,1 @@
+builder_extra_args="--override-module module_dnbd3.url=git://git.openslx.org/dnbd3-ng.git --override-module module_dnbd3.commit=b57dadc2d - --omit-driver loop"

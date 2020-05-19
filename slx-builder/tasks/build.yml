@@ -1,6 +1,6 @@
 ---
 - name: OpenSLX dracut | Build initramfs
-  shell: "{{ builder_path }} -s -d -p {{ builder_target }} {{ builder_extra_args }} - --add 'kexec-reboot'"
+  shell: "{{ builder_path }} -s -d -p {{ builder_target }} {{ builder_extra_args }}"
   args:
     creates: "{{ builder_target }}"
 

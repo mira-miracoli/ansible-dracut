@@ -6,6 +6,8 @@
      update_cache: yes
   vars:
      packages:
+       - curl
+       - python
        - libfuse-dev
        - libglib2.0-dev
        - libpixman-1-dev

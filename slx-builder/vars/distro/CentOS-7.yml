@@ -1,1 +1,1 @@
-builder_extra_args: "-q xmount"
+builder_extra_args: "--qcow-handler xmount"

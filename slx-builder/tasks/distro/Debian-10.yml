@@ -1,0 +1,25 @@
+---
+- name: Ubuntu-18 | Install packages
+  apt:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+     packages:
+       - curl
+       - python
+       - libfuse-dev
+       - libglib2.0-dev
+       - libpixman-1-dev
+       - libewf-dev
+       - libafflib-dev
+       - libjansson-dev
+       - dmsetup
+       - iputils-arping
+       - kexec-tools
+       - libkmod-dev
+       - linux-headers-amd64
+       - autopoint
+       - autoconf
+       - bison
+       - libtool

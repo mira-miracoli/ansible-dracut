@@ -1,5 +1,5 @@
 ---
-- name: Ubuntu-18 | Install packages
+- name: Debian-10 | Install packages
   apt:
      name: "{{ packages }}"
      state: latest

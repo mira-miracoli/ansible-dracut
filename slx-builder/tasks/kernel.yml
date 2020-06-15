@@ -1,0 +1,37 @@
+---
+# determine which kernel to build against
+# custom kernel should create a /.kernel file
+# with this content:
+#
+# version=<kernel_version>
+# path=<kernel_path>
+# src=<kernel_source>
+- name: Check if a custom kernel is specified
+  stat:
+    path: /.kernel
+  register: custom_kernel_file
+
+- name: Set the custom kernel paths
+  block:
+    - shell: awk -F= '$1 == "{{ item }}" {print $2}' /.kernel
+      register: "custom_kernel"
+      with_items:
+        - path
+        - src
+        - version
+    - set_fact:
+        builder_kernel_path: "{{ custom_kernel.results[0].stdout }}"
+        builder_kernel_source: "{{ custom_kernel.results[1].stdout }}"
+        builder_kernel_version: "{{ custom_kernel.results[2].stdout }}"
+  when: custom_kernel_file.stat.exists
+
+- name: Set the running kernel paths
+  set_fact:
+    builder_kernel_path: "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^.*(/boot/.*)+$', '\\1') }}"
+    builder_kernel_version: "{{ ansible_kernel }}"
+    builder_kernel_source: "/lib/modules/{{ ansible_kernel }}/build"
+  when: not custom_kernel_file.stat.exists
+
+- name: Set the builder kernel arguments
+  set_fact:
+    builder_kernel_args: "-k {{ builder_kernel_version }} -H {{ builder_kernel_source }}"

@@ -8,9 +8,10 @@
   get_url:
     url: "{{ builder_url }}"
     dest: "{{ builder_path }}"
-    mode: 0550
+    mode: 0650
+    force: yes
 
-- name: OpenSLX dracut | Get distro specific tasks
+- name: OpenSLX dracut | Include distro specific tasks
   include_tasks: "{{ item }}"
   with_first_found:
     - "{{ role_path }}/tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_version}}.yml"
@@ -25,6 +26,13 @@
     - "{{ role_path }}/vars/distro/{{ ansible_distribution }}.yml"
 
 - name: OpenSLX dracut | Initialize repository
-  shell: "{{ builder_path }} --init --debug {{ builder_extra_args }}"
+  shell: >-
+    {{ builder_path }}
+    --debug
+    --update
+    --init
+    {{ builder_kernel_args }}
+    {{ builder_distro_args | default() }}
+    {{ builder_extra_args | default() }}
   args:
     creates: "${{ builder_path | dirname }}/dracut/dracut.sh"

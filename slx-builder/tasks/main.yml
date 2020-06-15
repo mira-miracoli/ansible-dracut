@@ -1,4 +1,8 @@
 ---
+- import_tasks: tasks/kernel.yml
+  tags:
+    - install
+
 - import_tasks: tasks/install.yml
   tags:
     - install

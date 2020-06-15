@@ -1,4 +1,4 @@
-builder_extra_args: >-
+builder_distro_args: >-
   --override-module module_dnbd3.url=git://git.openslx.org/dnbd3-ng.git
   --override-module module_dnbd3.commit=b57dadc2d
   --override-module module_kernel_qcow2_linux.branch=centos-4.18.x

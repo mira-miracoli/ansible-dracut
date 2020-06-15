@@ -1,1 +1,3 @@
-builder_extra_args: "--qcow-handler xmount"
+builder_distro_args: >
+  --qcow-handler kernel
+  - --add 'slx-clock slx-addons slx-runmode slx-uuid slx-splash slx-drm'

@@ -18,3 +18,7 @@
        - iputils-arping
        - kexec-tools
        - libkmod-dev
+       - autopoint
+       - libelf-dev
+       - libtool
+       - ntpdate

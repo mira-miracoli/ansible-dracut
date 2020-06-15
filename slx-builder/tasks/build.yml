@@ -1,10 +1,18 @@
 ---
 - name: OpenSLX dracut | Build initramfs
-  shell: "{{ builder_path }} -s -d -p {{ builder_target }} {{ builder_extra_args }}"
+  shell: >-
+    {{ builder_path }}
+    --debug
+    --update
+    --file-path
+    {{ builder_target }}
+    {{ builder_kernel_args }}
+    {{ builder_distro_args | default() }}
+    {{ builder_extra_args | default() }}
   args:
     creates: "{{ builder_target }}"
 
-- name: OpenSLX dracut | Retrieve initramfs and kernel (+ hack for weird /@ prefix of BOOT_IMAGE)
+- name: OpenSLX dracut | Retrieve initramfs and kernel
   fetch:
     src: "{{ item }}"
     dest: "{{ playbook_dir }}/boot_files/"
@@ -12,7 +20,7 @@
     flat: yes
   with_items:
     - "{{ builder_target }}"
-    - "{{ ansible_cmdline.BOOT_IMAGE | regex_replace('^.*(/boot/.*)+$', '\\1') }}"
+    - "{{ builder_kernel_path }}"
 
 - name: OpenSLX dracut | Cleanup
   file:

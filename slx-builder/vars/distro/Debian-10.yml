@@ -1,1 +1,1 @@
-builder_extra_args: "--qcow-handler kernel"
+builder_distro_args: "--qcow-handler kernel"

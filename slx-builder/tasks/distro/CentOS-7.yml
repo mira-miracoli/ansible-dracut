@@ -19,3 +19,4 @@
        - systemd-resolved
        - kexec-tools
        - kmod-devel
+       - haveged

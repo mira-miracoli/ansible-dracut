@@ -20,3 +20,5 @@
        - kexec-tools
        - kmod-devel
        - haveged
+  tags:
+    - always

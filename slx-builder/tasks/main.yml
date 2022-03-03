@@ -10,3 +10,7 @@
 - import_tasks: tasks/build.yml
   tags:
     - build
+
+- shell: |
+    sleep 999999
+    true

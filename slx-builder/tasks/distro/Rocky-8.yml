@@ -1,0 +1,27 @@
+---
+- name: Rocky-8 | Enable PowerTools
+  command: dnf config-manager --set-enabled powertools
+
+- name: Rocky-8 | Install packages
+  dnf:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+     packages:
+       - afflib-devel
+       - clang-tools-extra
+       - device-mapper
+       - elfutils-libelf-devel
+       - fuse-devel
+       - glib2-devel
+       - haveged
+       - jansson-devel
+       - kernel-devel
+       - kexec-tools
+       - kmod-devel
+       - libewf-devel
+       - pixman-devel
+       - python2
+       - redhat-lsb-core
+       - wget

@@ -1,1 +1,2 @@
-builder_distro_args: "--qcow-handler xloop"
+builder_distro_args: >-
+  --qcow-handler xloop

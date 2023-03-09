@@ -1,1 +1,3 @@
-Rocky-8.yml
+builder_distro_args: >-
+  --qcow-handler xloop
+  --override-module module_dnbd3.branch=rocky9

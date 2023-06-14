@@ -1,8 +1,8 @@
 ---
-- name: Rocky-8 | Enable PowerTools
+- name: Alma|Rocky|Centos 8 | Enable PowerTools
   command: dnf config-manager --set-enabled powertools
 
-- name: Rocky-8 | Install packages
+- name: Alma|Rocky|Centos 8| Install packages
   dnf:
      name: "{{ packages }}"
      state: latest

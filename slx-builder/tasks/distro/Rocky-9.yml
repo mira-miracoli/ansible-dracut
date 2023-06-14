@@ -1,8 +1,8 @@
 ---
-- name: Rocky-9 | Enable devel repo
+- name: Alma|Rocky|Centos 9 | Enable devel repo
   command: dnf config-manager --enable devel
 
-- name: Rocky-9 | Install packages
+- name: Alma|Rocky|Centos 9 | Install packages
   dnf:
      name: "{{ packages }}"
      state: latest

@@ -1,2 +1,4 @@
 builder_distro_args: >-
   --qcow-handler xloop
+  --override-module module_dnbd3.branch=rocky9_test
+  --override-module module_xloop.branch=rocky9_test

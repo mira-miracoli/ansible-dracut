@@ -1,1 +1,12 @@
-CentOS.yml
+---
+- name: Alma|Rocky|CentOS | Install packages
+  yum:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+    packages:
+      - "epel-release"
+      - "@development tools"
+      - "cmake"
+      - "git"

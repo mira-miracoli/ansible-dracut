@@ -1,7 +1,0 @@
----
-- name: DevTools | Get distro specific tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-      - "{{ role_path }}/tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_version}}.yml"
-      - "{{ role_path }}/tasks/distro/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
-      - "{{ role_path }}/tasks/distro/{{ ansible_distribution }}.yml"
